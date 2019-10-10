@@ -1,0 +1,37 @@
+CREATE TABLE Positions (
+    ID INTEGER PRIMARY KEY, 
+    POSITION_NAME VARCHAR(50) NOT NULL
+);
+
+INSERT INTO Positions VALUES (1, 'Cashier');
+INSERT INTO Positions VALUES (2, 'Seller');
+INSERT INTO Positions VALUES (3, 'Pizzaiolo');
+INSERT INTO Positions VALUES (4, 'Manager');
+INSERT INTO Positions VALUES (5, 'Administrator');
+INSERT INTO Positions VALUES (6, 'Waiter');
+
+SELECT * FROM Positions;
+
+CREATE TABLE Personal (
+    ID INTEGER PRIMARY KEY, 
+    SURNAME VARCHAR(50) NOT NULL, 
+    NAME VARCHAR(50) NOT NULL, 
+    PHONE_NUMBER INTEGER, 
+    E_MAIL VARCHAR(50), 
+    DATE_OF_BIRTH DATE,
+    ID_POSITIONS INTEGER,
+    FOREIGN KEY (ID_POSITIONS) REFERENCES Positions (ID)
+);
+    
+INSERT INTO Personal VALUES (1, 'Ivanov', 'Ivan', 0932030450, 'ivanov@gmail.com', '1985-10-15', 2);
+INSERT INTO Personal VALUES (2, 'Andreev', 'Andrey', 0632963451, 'andreev@gmail.com', '1990-03-12', 4);
+INSERT INTO Personal VALUES (3, 'Petrov', 'Petr', 0678523491, 'petrov@gmail.com', '1993-01-1', 1);
+INSERT INTO Personal VALUES (4, 'Mykhailov', 'Mykhail', 0998877521, 'mykhailov@gmail.com', '1989-11-10', 5);
+INSERT INTO Personal VALUES (5, 'Aleksandrov', 'Aleksandr', 0665231654, 'aleksandrov@gmail.com', '1991-05-26', 3);
+INSERT INTO Personal VALUES (6, 'Alekseev', 'Alexey', 0931010231, 'alekseev@gmail.com', '1994-12-04', 6);
+
+SELECT * FROM Personal;
+SELECT SURNAME, PHONE_NUMBER FROM Personal where id > 4;
+SELECT * FROM Personal INNER JOIN Positions on Personal.ID_POSITIONS = Positions.ID;
+SELECT * FROM Personal INNER JOIN Positions on Personal.ID_POSITIONS = Positions.ID WHERE NAME = 'Andrey';
+
